@@ -1,6 +1,5 @@
 const { 
-  Client, GatewayIntentBits, EmbedBuilder, 
-  ActionRowBuilder, ButtonBuilder, ButtonStyle 
+  Client, GatewayIntentBits, EmbedBuilder
 } = require('discord.js');
 require('dotenv').config();
 
@@ -20,11 +19,13 @@ client.on('messageCreate', async (message) => {
   if (message.author.bot) return;
   if (!message.content.startsWith('!update')) return;
 
+  const BANNER_URL = 'https://i.imgur.com/alKA95k.png';
+
   const updateData = {
     map: 'Violence District',
     rankType: 'Service Provider | Premium',
     version: '1.0.0',
-    tag: '@Service Provider | @Premium Script', 
+    tag: '@Service Provider | @Premium',
     added: ['Game Violence District'],
     fixed: [],
     removed: [],
@@ -32,49 +33,67 @@ client.on('messageCreate', async (message) => {
 
   const embed = new EmbedBuilder()
     .setAuthor({ 
-      name: 'Zuperming Bot', 
+      name: '⚡ ZUPERMING BOT', 
       iconURL: client.user.displayAvatarURL() 
     })
-    .setTitle('🗂️ Zuperming Update Logs')
-    .setColor(0x5865F2)
+    .setTitle('```\n[ ZUPERMING UPDATE LOGS ]\n```')
+    .setColor(0x00FFFF)
+    .setImage(BANNER_URL)
     .addFields(
-      { name: '🗺️ Map', value: `\`${updateData.map}\``, inline: true },
-      { name: '🏅 Rank Type', value: `\`${updateData.rankType}\``, inline: true },
-      { name: '\u200B', value: '\u200B', inline: true },
-      { name: '🔢 Version', value: `\`${updateData.version}\``, inline: true },
-      { name: '🏷️ Tag', value: updateData.tag, inline: true },
-      { name: '\u200B', value: '\u200B', inline: true },
+      { 
+        name: '🗺️ MAP', 
+        value: `\`\`\`fix\n${updateData.map}\n\`\`\``, 
+        inline: true 
+      },
+      { 
+        name: '🏅 RANK TYPE', 
+        value: `\`\`\`fix\n${updateData.rankType}\n\`\`\``, 
+        inline: true 
+      },
+      { 
+        name: '🔢 VERSION', 
+        value: `\`\`\`fix\n${updateData.version}\n\`\`\``, 
+        inline: true 
+      },
+      { 
+        name: '🏷️ TAG', 
+        value: `\`\`\`fix\n${updateData.tag}\n\`\`\``, 
+        inline: true 
+      },
     )
     .setTimestamp()
-    .setFooter({ text: 'Zuperming Bot • Update System' });
+    .setFooter({ 
+      text: '⚡ Zuperming System • Powered by Neon', 
+      iconURL: client.user.displayAvatarURL() 
+    });
 
   const embedLog = new EmbedBuilder()
-    .setTitle('📝 Logs Update!')
-    .setColor(0x2B2D31)
+    .setTitle('```\n[ LOGS UPDATE ]\n```')
+    .setColor(0xFF00FF)
     .addFields(
       { 
-        name: '✅ Added', 
+        name: '✅ ADDED', 
         value: updateData.added.length 
-          ? updateData.added.map(i => `\`[+]\` ${i}`).join('\n') 
-          : '`-`' 
+          ? updateData.added.map(i => `\`\`\`diff\n+ ${i}\n\`\`\``).join('') 
+          : '```diff\n- None\n```'
       },
       { 
-        name: '🔧 Fixed', 
+        name: '🔧 FIXED', 
         value: updateData.fixed.length 
-          ? updateData.fixed.map(i => `\`[~]\` ${i}`).join('\n') 
-          : '`-`' 
+          ? updateData.fixed.map(i => `\`\`\`diff\n~ ${i}\n\`\`\``).join('') 
+          : '```diff\n- None\n```'
       },
       { 
-        name: '❌ Removed', 
+        name: '❌ REMOVED', 
         value: updateData.removed.length 
-          ? updateData.removed.map(i => `\`[-]\` ${i}`).join('\n') 
-          : '`-`' 
+          ? updateData.removed.map(i => `\`\`\`diff\n- ${i}\n\`\`\``).join('') 
+          : '```diff\n- None\n```'
       },
     )
-    .setColor(0x5865F2);
+    .setFooter({ text: '⚡ Zuperming • Cyber Edition' });
 
   await message.channel.send({
-    content: '> 🔔 **Rejoin to apply update!**\n> Report Bugs and Suggestions to admin.',
+    content: '> ⚡ **[ SYSTEM UPDATE DETECTED ]**\n> `Rejoin to apply the latest update!`',
     embeds: [embed, embedLog],
   });
 });
