@@ -26,7 +26,7 @@ client.on('messageCreate', async (message) => {
     map: 'Violencr District',
     rankType: 'Service Provider, Premium', 
     version: '1.0.0',
-    tag: '@Service Provider', '@Premium Script',
+    tag: '@Service Provider | @Premium Script',
     added: ['New Game Violence District],
     fixed: ['Bug login'],
     removed: [],
