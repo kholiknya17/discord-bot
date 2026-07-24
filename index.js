@@ -19,8 +19,6 @@ client.on('messageCreate', async (message) => {
   if (message.author.bot) return;
   if (!message.content.startsWith('!update')) return;
 
-  const BANNER_URL = 'https://i.imgur.com/alKA95k.png';
-
   const updateData = {
     map: 'Violence District',
     rankType: 'Service Provider | Premium',
@@ -33,67 +31,38 @@ client.on('messageCreate', async (message) => {
 
   const embed = new EmbedBuilder()
     .setAuthor({ 
-      name: '⚡ ZUPERMING BOT', 
+      name: 'Zuperming Bot', 
       iconURL: client.user.displayAvatarURL() 
     })
-    .setTitle('```\n[ ZUPERMING UPDATE LOGS ]\n```')
-    .setColor(0x00FFFF)
-    .setImage(BANNER_URL)
-    .addFields(
-      { 
-        name: '🗺️ MAP', 
-        value: `\`\`\`fix\n${updateData.map}\n\`\`\``, 
-        inline: true 
-      },
-      { 
-        name: '🏅 RANK TYPE', 
-        value: `\`\`\`fix\n${updateData.rankType}\n\`\`\``, 
-        inline: true 
-      },
-      { 
-        name: '🔢 VERSION', 
-        value: `\`\`\`fix\n${updateData.version}\n\`\`\``, 
-        inline: true 
-      },
-      { 
-        name: '🏷️ TAG', 
-        value: `\`\`\`fix\n${updateData.tag}\n\`\`\``, 
-        inline: true 
-      },
+    .setTitle('🟣 Zuperming Update Logs')
+    .setColor(0x6A0DAD)
+    .setDescription(
+      `• **Map :** ${updateData.map}\n` +
+      `• **Rank Type :** ${updateData.rankType}\n` +
+      `• **Version :** ${updateData.version}\n` +
+      `• **Tag :** ${updateData.tag}`
     )
     .setTimestamp()
     .setFooter({ 
-      text: '⚡ Zuperming System • Powered by Neon', 
+      text: 'Zuperming Bot • Update System', 
       iconURL: client.user.displayAvatarURL() 
     });
 
   const embedLog = new EmbedBuilder()
-    .setTitle('```\n[ LOGS UPDATE ]\n```')
-    .setColor(0xFF00FF)
-    .addFields(
-      { 
-        name: '✅ ADDED', 
-        value: updateData.added.length 
-          ? updateData.added.map(i => `\`\`\`diff\n+ ${i}\n\`\`\``).join('') 
-          : '```diff\n- None\n```'
-      },
-      { 
-        name: '🔧 FIXED', 
-        value: updateData.fixed.length 
-          ? updateData.fixed.map(i => `\`\`\`diff\n~ ${i}\n\`\`\``).join('') 
-          : '```diff\n- None\n```'
-      },
-      { 
-        name: '❌ REMOVED', 
-        value: updateData.removed.length 
-          ? updateData.removed.map(i => `\`\`\`diff\n- ${i}\n\`\`\``).join('') 
-          : '```diff\n- None\n```'
-      },
-    )
-    .setFooter({ text: '⚡ Zuperming • Cyber Edition' });
+    .setTitle('📝 Logs Update!')
+    .setColor(0x3B0764)
+    .setDescription(
+      (updateData.added.length ? 
+        '**Added**\n' + updateData.added.map(i => `\`[ + ]\` ${i}`).join('\n') : '') +
+      (updateData.fixed.length ? 
+        '\n\n**Fixed**\n' + updateData.fixed.map(i => `\`[ ~ ]\` ${i}`).join('\n') : '') +
+      (updateData.removed.length ? 
+        '\n\n**Removed**\n' + updateData.removed.map(i => `\`[ - ]\` ${i}`).join('\n') : '') ||
+      '`[ - ]` No changes'
+    );
 
   await message.channel.send({
-    content: '> ⚡ **[ SYSTEM UPDATE DETECTED ]**\n> `Rejoin to apply the latest update!`',
+    content: '> 🔔 **Rejoin to apply update!**\n> Report Bugs and Suggestions to admin.',
     embeds: [embed, embedLog],
   });
 });
