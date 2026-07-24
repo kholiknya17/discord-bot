@@ -16,23 +16,20 @@ client.once('ready', () => {
   console.log(`✅ Bot aktif: ${client.user.tag}`);
 });
 
-// Kirim update log dengan !update
 client.on('messageCreate', async (message) => {
   if (message.author.bot) return;
   if (!message.content.startsWith('!update')) return;
 
-  // Contoh data update
   const updateData = {
-    map: 'Violencr District',
-    rankType: 'Service Provider, Premium', 
+    map: 'Violence District',
+    rankType: 'Service Provider | Premium',
     version: '1.0.0',
     tag: '@Service Provider | @Premium Script',
-    added: ['New Game Violence District],
+    added: ['New Game Violence District'],
     fixed: ['Bug login'],
     removed: [],
   };
 
-  // Buat embed utama
   const embed = new EmbedBuilder()
     .setTitle('📋 Zuperming Logs')
     .setColor(0x5865F2)
@@ -44,15 +41,6 @@ client.on('messageCreate', async (message) => {
     )
     .setTimestamp();
 
-  // Embed logs update
-  let logsText = '';
-  if (updateData.added.length)
-    logsText += updateData.added.map(i => `[+] ${i}`).join('\n') + '\n';
-  if (updateData.fixed.length)
-    logsText += updateData.fixed.map(i => `[~] ${i}`).join('\n') + '\n';
-  if (updateData.removed.length)
-    logsText += updateData.removed.map(i => `[-] ${i}`).join('\n');
-
   const embedLog = new EmbedBuilder()
     .setTitle('📝 Logs Update!')
     .setColor(0x2B2D31)
@@ -62,23 +50,22 @@ client.on('messageCreate', async (message) => {
       { name: '❌ Removed', value: updateData.removed.map(i=>`\`[-]\` ${i}`).join('\n') || '-' },
     );
 
-  // Tombol
   const row = new ActionRowBuilder().addComponents(
     new ButtonBuilder()
       .setLabel('Report Bug')
       .setStyle(ButtonStyle.Link)
-      .setURL('https://discord.com/channels/https://discord.gg/AGxYsayeGz'),
+      .setURL('https://discord.gg/AGxYsayeGz'),
     new ButtonBuilder()
       .setLabel('Suggestions')
       .setStyle(ButtonStyle.Link)
-      .setURL('https://discord.com/channels/https://discord.gg/AGxYsayeGz'),
+      .setURL('https://discord.gg/AGxYsayeGz'),
   );
 
   await message.channel.send({
-    content: '> 🔔 **Enjoy the Script**\n> Report Bugs and Suggestions?',
+    content: '> 🔔 **Enjoy the Script!**\n> Report Bugs and Suggestions?',
     embeds: [embed, embedLog],
     components: [row],
   });
 });
 
-client.login(process.env.MTUyNjQyOTI2MjQyNzQ1OTYwNQ.GOuIvQ.5-MghcNyVCEYLkbpyPb3pqs15P5wEE2BMWN4Xw);
+client.login(process.env.MTUyNjQyOTI2MjQyNzQ1OTYwNQ.GXJurV.hqtnYrTOgHnyU-Ts3mYYLau5MDo_zWRWAt1eIY);
