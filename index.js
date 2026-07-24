@@ -26,7 +26,7 @@ client.on('messageCreate', async (message) => {
     version: '1.0.0',
     tag: '@Service Provider | @Premium Script',
     added: ['New Game Violence District'],
-    fixed: ['Bug login'],
+    fixed: [],
     removed: [],
   };
 
@@ -42,12 +42,10 @@ client.on('messageCreate', async (message) => {
     .setTimestamp();
 
   const embedLog = new EmbedBuilder()
-    .setTitle('📝 Logs Update!')
+    .setTitle('📝 Added Game!')
     .setColor(0x2B2D31)
     .addFields(
       { name: '✅ Added', value: updateData.added.map(i=>`\`[+]\` ${i}`).join('\n') || '-' },
-      { name: '🔧 Fixed', value: updateData.fixed.map(i=>`\`[~]\` ${i}`).join('\n') || '-' },
-      { name: '❌ Removed', value: updateData.removed.map(i=>`\`[-]\` ${i}`).join('\n') || '-' },
     );
 
   const row = new ActionRowBuilder().addComponents(
